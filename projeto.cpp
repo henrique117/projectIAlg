@@ -53,22 +53,18 @@ games *aumentar(games *acervos, int& n)
 void inserir(games *acervos, int& n, int& jogoInserido)
 {
 
-    int foundFalse = 0;
+    int foundFalse = n - 1;
 
     for (int i = 0; i < n; i++) {
         if(acervos[i].exists == false) {
             foundFalse = i;
             cout << "tem falso " << acervos[i].id << endl;
             acervos[i].exists = true;
-            break;
-        } else {
-            foundFalse = n;
+            i = n;
         }
     }
 
     cout << foundFalse << endl;
-
-    acervos = aumentar(acervos, n);
 
     acervos[n-1].id = n;
     cin.ignore();
@@ -78,7 +74,7 @@ void inserir(games *acervos, int& n, int& jogoInserido)
     cin >> acervos[foundFalse].preco;
     cin.ignore();
 
-    jogoInserido = foundFalse - 1;
+    jogoInserido = foundFalse;
     
 }
 
@@ -327,6 +323,18 @@ int main()
             case 3:{
                 cout << "Digite o nome do jogo, a plataforma de venda, a empresa do jogo e o seu valor.(Separados por vírgula)" << endl;
                 int jogoInserido = 0;
+                bool verify = true;
+                for (int i = 0; i < n; i++) {
+                    if(acervos[i].exists == false) {
+                        verify = false;
+                        i = n;
+                    }
+                }
+
+                if (verify) {
+                    acervos = aumentar(acervos, n);
+                }
+
                 inserir(acervos, n, jogoInserido);
                 cout << endl << "O jogo '" << acervos[jogoInserido].nome << "' foi inserido com sucesso!" << endl << endl;
                 break;
@@ -358,8 +366,8 @@ int main()
 				cin >> ord;
 				ordenar(acervos, n, ord);
 				cout << endl << "O vetor foi ordenado!" << endl << endl;
-			}
-*/
+			}*/
+            
             default:
                 break;
             }
