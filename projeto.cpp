@@ -58,13 +58,10 @@ void inserir(games *acervos, int& n, int& jogoInserido)
     for (int i = 0; i < n; i++) {
         if(acervos[i].exists == false) {
             foundFalse = i;
-            cout << "tem falso " << acervos[i].id << endl;
             acervos[i].exists = true;
             i = n;
         }
     }
-
-    cout << foundFalse << endl;
 
     acervos[n-1].id = n;
     cin.ignore();
@@ -367,7 +364,7 @@ int main()
 				ordenar(acervos, n, ord);
 				cout << endl << "O vetor foi ordenado!" << endl << endl;
 			}*/
-            
+
             default:
                 break;
             }
