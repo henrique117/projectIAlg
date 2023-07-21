@@ -98,7 +98,7 @@ void buscar(games *acervos, int n, bool &verified)
 {
 
     int search;
-    cout << "Por qual informação você deseja pesquisar:\n1: ID\n2: Nome\n3: Plataforma\n4: Empresa\n";
+    cout << "Por qual informação você deseja pesquisar:\n1: ID\n2: Nome\n3: Plataforma\n4: Empresa\n0: Cancelar operação\n";
     cin >> search;
 
     if (search == 1)
@@ -180,6 +180,10 @@ void buscar(games *acervos, int n, bool &verified)
             }
         }
     }
+    else if (search == 0)
+        {
+            cout << endl << "Operação cancelada" << endl << endl;
+        }
     else
     {
         cout << endl
@@ -189,42 +193,70 @@ void buscar(games *acervos, int n, bool &verified)
     }
 }
 
-void editar(games *acervos, int idEdit, int edit)
+void editar(games *acervos)
 {
+
+    int idEdit, edit = 0;
+    cout << "Digite o ID do registro que voce deseja Editar: ";
+    cin >> idEdit;
+
     if (acervos[idEdit - 1].exists)
     {
+        cout << endl << "O que voce deseja editar?\n1: Nome\n2: Plataforma\n3: Empresa\n4: Preco\n0: Cancelar operação\n";
+        cin >> edit;
         if (edit == 1)
         {
+            cout << endl
+                 << "Digite a informação que substituirá a atual:" << endl;
             string newName;
             cin.ignore();
             getline(cin, newName);
             acervos[idEdit - 1].nome = newName;
+            cout << "O nome do jogo do ID: " << idEdit << " foi editado no acervo de jogos!" << endl
+                 << endl;
         }
         else if (edit == 2)
         {
+            cout << endl
+                 << "Digite a informação que substituirá a atual:" << endl;
             string newPlat;
             cin.ignore();
             getline(cin, newPlat);
             acervos[idEdit - 1].plat = newPlat;
+            cout << "A plataforma do jogo do ID: " << idEdit << " foi editado no acervo de jogos!" << endl
+                 << endl;
         }
         else if (edit == 3)
         {
+            cout << endl
+                 << "Digite a informação que substituirá a atual:" << endl;
             string newEmp;
             cin.ignore();
             getline(cin, newEmp);
             acervos[idEdit - 1].empresa = newEmp;
+            cout << "A empresa do jogo do ID: " << idEdit << " foi editado no acervo de jogos!" << endl
+                 << endl;
         }
         else if (edit == 4)
         {
+            cout << endl
+                 << "Digite a informação que substituirá a atual:" << endl;
             float newPrice;
             cin >> newPrice;
             acervos[idEdit - 1].preco = newPrice;
+            cout << "O valor do jogo do ID: " << idEdit << " foi editado no acervo de jogos!" << endl
+                 << endl;
+        }
+        else if (edit == 0)
+        {
+            cout << endl << "Operação cancelada" << endl << endl;
         }
         else
         {
             cout << endl
                  << "Digite uma opção válida!!" << endl
                  << endl;
+            editar(acervos);
         }
     }
     else
@@ -382,17 +414,8 @@ int main()
             }
             else if (h == 4)
             {
-                int idEdit, edit = 0;
-                cout << "Digite o ID do registro que voce deseja Editar: ";
-                cin >> idEdit;
-                cout << endl
-                     << "O que voce deseja editar?\n1: Nome\n2: Plataforma\n3: Empresa\n4: Preco\n";
-                cin >> edit;
-                cout << endl
-                     << "Digite a informação que substituirá a atual:" << endl;
-                editar(acervos, idEdit, edit);
-                cout << "Jogo do ID: " << idEdit << " foi editado no acervo de jogos!" << endl
-                     << endl;
+                editar(acervos);
+                cout << endl;
             }
             else if (h == 5)
             {
